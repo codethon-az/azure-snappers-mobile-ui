@@ -1,0 +1,72 @@
+<div class="snapper-cam__webcam-container">
+  <mat-card class="webcam-card">
+    <webcam class="snapper-cam__webcam" [height]="390" [width]="390" [trigger]="triggerObservable"
+    (imageCapture)="handleImage($event)" *ngIf="showWebcam" [allowCameraSwitch]="allowCameraSwitch"
+    [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions" [imageQuality]="1"
+    (cameraSwitched)="cameraWasSwitched($event)" (initError)="handleInitError($event)"></webcam>
+  </mat-card>
+
+
+  <div class="snapper-cam_snapshot-result">
+    <mat-card *ngIf="webcamImage">
+      <mat-card-title-group>
+        <mat-card-title>Property Highlights</mat-card-title>
+        <mat-card-subtitle>Address: {{ this.freeformAddress }}</mat-card-subtitle>
+        <img mat-card-sm-md [src]="webcamImage.imageAsDataUrl" width="20%" height="20%" >
+      </mat-card-title-group>
+      <mat-card-content>
+        <p>Longitude: {{ longitude }}</p>
+        <p>Latitude: {{ latitude }}</p>  
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="webcamImage=null">
+          Close
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+</div>
+<div>
+  <button class="snapper-cam_snapshot" mat-raised-button color="primary" (click)="triggerSnapshot();">
+    Snap It
+  </button>
+
+  <button class="snapper-cam_talk" mat-raised-button color="primary" (click)="triggerTalk();">
+    Talk It
+  </button>
+</div>
+
+
+<ng-container *ngIf="multipleWebcamsAvailable">
+  <button class="actionBtn" (click)="showNextWebcam(true);" [disabled]="!multipleWebcamsAvailable">Next Webcam</button>
+  <input id="cameraSwitchCheckbox" type="checkbox" [(ngModel)]="allowCameraSwitch">
+  <label for="cameraSwitchCheckbox">Allow Camera Switch</label>
+</ng-container>
+
+<!--
+<button class="actionBtn" (click)="toggleWebcam();">Toggle Webcam</button>
+
+<br />
+DeviceId: <input id="deviceId" type="text" [(ngModel)]="deviceId" style="width: 500px">
+<button (click)="showNextWebcam(deviceId);">Activate</button>
+<azure-map [center]="[11.47, 48.18]" mapStyle='grayscale_dark' [zoom]="10"></azure-map>
+-->
+
+
+
+
+<div #mapContainer id="map"></div>
+
+<azure-map [zoom]="5" [showBuildingModels]="false" (onReady)="mapReady($event)">
+  <map-zoom-control></map-zoom-control>
+  <map-pitch-control></map-pitch-control>
+  <map-compass-control></map-compass-control>
+  <map-style-control></map-style-control>
+</azure-map>
+
+
+<h4 *ngIf="errors.length > 0">Messages:</h4>
+<ul *ngFor="let error of errors">
+  <li>{{error | json}}</li>
+</ul>

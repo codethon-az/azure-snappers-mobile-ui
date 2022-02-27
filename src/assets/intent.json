@@ -1,0 +1,27 @@
+{
+    "query": "what are the schools nearby",
+    "topScoringIntent": {
+        "intent": "NeighborhoodDetails",
+        "score": 0.70333314
+    },
+    "entities": [
+        {
+            "entity": "schools nearby",
+            "type": "Places.PlaceType",
+            "startIndex": 13,
+            "endIndex": 26,
+            "score": 0.46037534
+        },
+        {
+            "entity": "nearby",
+            "type": "Places.Nearby",
+            "startIndex": 21,
+            "endIndex": 26,
+            "resolution": {
+                "values": [
+                    "nearby"
+                ]
+            }
+        }
+    ]
+}

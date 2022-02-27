@@ -1,0 +1,37 @@
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+
+.webcam-card {
+    max-width: 420px;
+    padding: 2px;
+    margin: 4px;
+}
+
+.snapper-cam__webcam {
+margin: 4px;
+}
+
+.snapper-cam__webcam-container, .snapper-cam_snapshot-result {
+    height:410px;
+    width:410px;
+}
+
+.snapper-cam_snapshot {
+    position:absolute;
+    top:247px;
+    left: 12px;
+    z-index: 99;
+}
+
+.snapper-cam_talk {
+    position:absolute;
+    top:247px;
+    margin-left: 7%;
+    z-index: 99;
+}
+
+.snapper-cam_snapshot-result {
+    position:absolute;
+    top:0px;
+    opacity: 0.7;
+    z-index: 1;
+}
